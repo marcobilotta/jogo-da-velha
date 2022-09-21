@@ -18,11 +18,61 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
     
     public TelaJogoDaVelha() {
         initComponents();
-        panJogo.setVisible(false);
-        panJogadores.setVisible(false);
-        
+        this.desativarPaineisJogadores();
     }
-
+    
+    Game game = new Game();
+    
+    //Métodos
+    private void desativarPaineisJogadores(){
+        panJogador1.setVisible(false);
+        panJogador2.setVisible(false);
+        panVezDoJogador.setVisible(false);
+        panJogo.setVisible(false);
+    }
+    
+    private void liberarPainelJogador1(){
+        panJogador1.setLayout(new GroupLayout(panJogador1));
+        panJogador1.add(lblJogador1);
+        panJogador1.add(lblNomeJogador1);
+        panJogador1.add(lblMarcador1Jogador1);
+        panJogador1.add(lblMarcador2Jogador1);
+        panJogador1.add(lblMarcador3Jogador1);
+        game.NomearJogador1();
+        lblNomeJogador1.setText(game.getJogador1().getNome());
+        panJogador1.setVisible(true);
+    }
+    
+    private void liberarPainelJogador2(){
+        panJogador2.setLayout(new GroupLayout(panJogador2));
+        panJogador2.add(lblJogador2);
+        panJogador2.add(lblNomeJogador2);
+        panJogador2.add(lblMarcador1Jogador2);
+        panJogador2.add(lblMarcador2Jogador2);
+        panJogador2.add(lblMarcador3Jogador2);
+        game.NomearJogador2();
+        lblNomeJogador2.setText(game.getJogador2().getNome());
+        panJogador2.setVisible(true);
+    }
+    
+    private void liberarPainelVezJogador(){
+        panVezDoJogador.setLayout(new GroupLayout(panVezDoJogador));
+        panVezDoJogador.add(lblVezDoJogador);
+        panVezDoJogador.add(lblIndicadorJogador);
+        panVezDoJogador.setVisible(true);
+    }
+    
+    private void liberarPainelJogo(){
+        panJogo.setLayout(new GroupLayout(panJogo));
+        List<CampoTabuleiro> camposTabuleiro = new ArrayList<>();
+        camposTabuleiro = game.getTabuleiro().criarCamposTabuleiro();
+            for (int i = 0; i < 9; i++){
+                panJogo.add(camposTabuleiro.get(i));
+            }
+        panJogo.add(game.getTabuleiro());
+        panJogo.setVisible(true);
+    }   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,12 +83,22 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
     private void initComponents() {
 
         sptCabecalho = new javax.swing.JSeparator();
-        panJogo = new java.awt.Panel();
-        panJogadores = new java.awt.Panel();
+        panJogador1 = new javax.swing.JPanel();
         lblJogador1 = new javax.swing.JLabel();
         lblNomeJogador1 = new javax.swing.JLabel();
-        lblNomeJogador2 = new javax.swing.JLabel();
+        lblMarcador1Jogador1 = new javax.swing.JLabel();
+        lblMarcador2Jogador1 = new javax.swing.JLabel();
+        lblMarcador3Jogador1 = new javax.swing.JLabel();
+        panVezDoJogador = new javax.swing.JPanel();
+        lblVezDoJogador = new javax.swing.JLabel();
+        lblIndicadorJogador = new javax.swing.JLabel();
+        panJogador2 = new javax.swing.JPanel();
         lblJogador2 = new javax.swing.JLabel();
+        lblNomeJogador2 = new javax.swing.JLabel();
+        lblMarcador1Jogador2 = new javax.swing.JLabel();
+        lblMarcador2Jogador2 = new javax.swing.JLabel();
+        lblMarcador3Jogador2 = new javax.swing.JLabel();
+        panJogo = new java.awt.Panel();
         panBotoes = new java.awt.Panel();
         btnSair = new javax.swing.JButton();
         btnNovoJogo = new javax.swing.JButton();
@@ -50,33 +110,68 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(sptCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 680, -1));
 
-        panJogo.setBackground(new java.awt.Color(242, 242, 242));
-        panJogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(panJogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 680, 450));
-
-        panJogadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panJogador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblJogador1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblJogador1.setForeground(new java.awt.Color(255, 51, 51));
         lblJogador1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblJogador1.setText("JOGADOR 1");
-        panJogadores.add(lblJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        panJogador1.add(lblJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lblNomeJogador1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblNomeJogador1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        panJogadores.add(lblNomeJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 300, 30));
+        panJogador1.add(lblNomeJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 260, 30));
 
-        lblNomeJogador2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblNomeJogador2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        panJogadores.add(lblNomeJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 330, 30));
+        lblMarcador1Jogador1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador1.add(lblMarcador1Jogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 30, 30));
+
+        lblMarcador2Jogador1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador1.add(lblMarcador2Jogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 30, 30));
+
+        lblMarcador3Jogador1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador1.add(lblMarcador3Jogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 30, 30));
+
+        getContentPane().add(panJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 110));
+
+        panVezDoJogador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblVezDoJogador.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        lblVezDoJogador.setText("VEZ DO JOGADOR");
+        panVezDoJogador.add(lblVezDoJogador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, -1));
+
+        lblIndicadorJogador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIndicadorJogador.setIcon(new javax.swing.ImageIcon("C:\\Users\\marco\\GitHub\\Projetos\\jogo-da-velha\\src\\main\\java\\bilotta\\images\\setaVerdeNeonD.png")); // NOI18N
+        panVezDoJogador.add(lblIndicadorJogador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
+
+        getContentPane().add(panVezDoJogador, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 130, 110));
+
+        panJogador2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblJogador2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblJogador2.setForeground(new java.awt.Color(255, 51, 51));
-        lblJogador2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblJogador2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblJogador2.setText("JOGADOR 2");
-        panJogadores.add(lblJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
+        lblJogador2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        panJogador2.add(lblJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 70, 20));
 
-        getContentPane().add(panJogadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 100));
+        lblNomeJogador2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNomeJogador2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        panJogador2.add(lblNomeJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 260, 30));
+
+        lblMarcador1Jogador2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador2.add(lblMarcador1Jogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 30, 30));
+
+        lblMarcador2Jogador2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador2.add(lblMarcador2Jogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 30, 30));
+
+        lblMarcador3Jogador2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panJogador2.add(lblMarcador3Jogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 30, 30));
+
+        getContentPane().add(panJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 270, 110));
+
+        panJogo.setBackground(new java.awt.Color(242, 242, 242));
+        panJogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(panJogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 680, 450));
 
         panBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -116,18 +211,10 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
 
     private void btnNovoJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoJogoActionPerformed
         panBotoes.setVisible(false);
-        panJogadores.setVisible(true);
-        Game game = new Game();
-        lblNomeJogador1.setText(game.getJogador1().getNome());
-        lblNomeJogador2.setText(game.getJogador2().getNome());
-        panJogo.setLayout(new GroupLayout(panJogo));
-        List<CampoTabuleiro> camposTabuleiro = new ArrayList<>();
-        camposTabuleiro = game.getTabuleiro().criarCamposTabuleiro();
-            for (int i = 0; i < 9; i++){
-                panJogo.add(camposTabuleiro.get(i));
-            }
-        panJogo.add(game.getTabuleiro());
-        panJogo.setVisible(true);
+        this.liberarPainelJogador1();
+        this.liberarPainelJogador2();
+        this.liberarPainelVezJogador();
+        this.liberarPainelJogo();
     }//GEN-LAST:event_btnNovoJogoActionPerformed
 
     /**
@@ -168,13 +255,23 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoJogo;
     private javax.swing.JButton btnSair;
+    private javax.swing.JLabel lblIndicadorJogador;
     private javax.swing.JLabel lblJogador1;
     private javax.swing.JLabel lblJogador2;
+    private javax.swing.JLabel lblMarcador1Jogador1;
+    private javax.swing.JLabel lblMarcador1Jogador2;
+    private javax.swing.JLabel lblMarcador2Jogador1;
+    private javax.swing.JLabel lblMarcador2Jogador2;
+    private javax.swing.JLabel lblMarcador3Jogador1;
+    private javax.swing.JLabel lblMarcador3Jogador2;
     private javax.swing.JLabel lblNomeJogador1;
     private javax.swing.JLabel lblNomeJogador2;
+    private javax.swing.JLabel lblVezDoJogador;
     private java.awt.Panel panBotoes;
-    private java.awt.Panel panJogadores;
+    private javax.swing.JPanel panJogador1;
+    private javax.swing.JPanel panJogador2;
     private java.awt.Panel panJogo;
+    private javax.swing.JPanel panVezDoJogador;
     private javax.swing.JSeparator sptCabecalho;
     // End of variables declaration//GEN-END:variables
 }

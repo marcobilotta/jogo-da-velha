@@ -28,8 +28,8 @@ public class Tabuleiro extends JLabel{
     private int posicaoInicialDoCampoEmY = 35;
     
     public Tabuleiro(){
-        definirImagemFundo();
-        definirTamanho();
+        this.definirImagemFundo();
+        this.definirTamanho();
     } 
     
     private void definirTamanho(){

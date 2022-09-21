@@ -12,6 +12,7 @@ public class Game {
     private Jogador jogador1;
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
+    private TelaJogoDaVelha telaJogoDaVelha;
     
     public Jogador getJogador1(){
         return this.jogador1;
@@ -30,16 +31,16 @@ public class Game {
     }
     
     public Game() {
-        this.NomearJogadores();
         tabuleiro = new Tabuleiro();
     }
     
-    private void NomearJogadores(){
+    public void NomearJogador1(){
         String nomeJogador1 = JOptionPane.showInputDialog(null, "Digite o nome do jogador 1", "NOME JOGADOR 1", 3);
         jogador1 = new Jogador(nomeJogador1);
+    }
+    
+    public void NomearJogador2(){
         String nomeJogador2 = JOptionPane.showInputDialog(null, "Digite o nome do jogador 2", "NOME JOGADOR 2", 3);
         jogador2 = new Jogador(nomeJogador2);
     }
-    
-    
 }
