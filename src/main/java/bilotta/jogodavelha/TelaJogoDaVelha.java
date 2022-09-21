@@ -2,11 +2,12 @@ package bilotta.jogodavelha;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.GroupLayout;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author marco
+ * @date - 18/09/2022
+ * @author - Marco Aurélio Bilotta e Luiz Eduardo Bilotta
  */
 
 public class TelaJogoDaVelha extends javax.swing.JFrame {
@@ -14,6 +15,7 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
     /**
      * Creates new form TelaJogoDaVelha
      */
+    
     public TelaJogoDaVelha() {
         initComponents();
         panJogo.setVisible(false);
@@ -43,23 +45,13 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(700, 700));
         setSize(new java.awt.Dimension(700, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(sptCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 680, -1));
 
         panJogo.setBackground(new java.awt.Color(242, 242, 242));
-
-        javax.swing.GroupLayout panJogoLayout = new javax.swing.GroupLayout(panJogo);
-        panJogo.setLayout(panJogoLayout);
-        panJogoLayout.setHorizontalGroup(
-            panJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-        panJogoLayout.setVerticalGroup(
-            panJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-
+        panJogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(panJogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 680, 450));
 
         panJogadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -128,14 +120,14 @@ public class TelaJogoDaVelha extends javax.swing.JFrame {
         Game game = new Game();
         lblNomeJogador1.setText(game.getJogador1().getNome());
         lblNomeJogador2.setText(game.getJogador2().getNome());
-        panJogo.setLayout(null);
-        panJogo.add(game.getTabuleiro());
+        panJogo.setLayout(new GroupLayout(panJogo));
         List<CampoTabuleiro> camposTabuleiro = new ArrayList<>();
         camposTabuleiro = game.getTabuleiro().criarCamposTabuleiro();
+            for (int i = 0; i < 9; i++){
+                panJogo.add(camposTabuleiro.get(i));
+            }
+        panJogo.add(game.getTabuleiro());
         panJogo.setVisible(true);
-        
-             
-        
     }//GEN-LAST:event_btnNovoJogoActionPerformed
 
     /**

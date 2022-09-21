@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  * @date - 16/09/2022
- * @author - Marco Aurélio Bilotta
+ * @author - Marco Aurélio Bilotta e Luiz Eduardo Bilotta
  */
 
 public class Game {
