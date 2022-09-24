@@ -1,6 +1,5 @@
 package bilotta.jogodavelha;
 
-import java.lang.reflect.Constructor;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,8 +11,7 @@ public class Game {
     private Jogador jogador1;
     private Jogador jogador2;
     private Tabuleiro tabuleiro;
-    private TelaJogoDaVelha telaJogoDaVelha;
-    
+        
     public Jogador getJogador1(){
         return this.jogador1;
     }
